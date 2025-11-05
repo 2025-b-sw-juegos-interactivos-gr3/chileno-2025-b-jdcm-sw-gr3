@@ -1,0 +1,27 @@
+{
+  "name": "babylon-local-demo",
+  "version": "1.0.0",
+  "description": "Demo local de BabylonJS servido con Node/Express",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview --port 5000",
+    "start": "node server.js",
+    "type-check": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test-imports": "vite --mode test-imports"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@babylonjs/core": "7.11.0",
+    "@babylonjs/loaders": "7.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.9.1",
+    "typescript": "5.9.3",
+    "vite": "5.0.0"
+  }
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧪 Test de Importaciones - Horror Mansion 3D</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #0f0f0f;
+      color: #00ff00;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff6600;
+      text-shadow: 2px 2px 4px rgba(255, 102, 0, 0.3);
+      margin-bottom: 30px;
+    }
+
+    .test-section {
+      background: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .test-section h2 {
+      color: #ffaa00;
+      border-bottom: 2px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .button {
+      background: linear-gradient(45deg, #ff6600, #ff9900);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255, 102, 0, 0.2);
+    }
+
+    .button:hover {
+      background: linear-gradient(45deg, #ff9900, #ffcc00);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(255, 102, 0, 0.3);
+    }
+
+    .button:active {
+      transform: translateY(0);
+    }
+
+    .status {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .instructions {
+      background: #001a33;
+      border: 2px solid #0066cc;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+
+    .instructions h3 {
+      color: #00ccff;
+      margin-top: 0;
+    }
+
+    .warning {
+      background: #331100;
+      border: 2px solid #ff6600;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+    }
+
+    .warning h4 {
+      color: #ff9900;
+      margin-top: 0;
+    }
+
+    #console-output {
+      background: #000;
+      color: #00ff00;
+      border: 2px solid #333;
+      padding: 15px;
+      height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+
+    .progress {
+      width: 100%;
+      height: 20px;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #00ff00, #ffff00);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🧪 Test de Importaciones - Horror Mansion 3D</h1>
+
+    <div class="instructions">
+      <h3>📋 Instrucciones de Uso</h3>
+      <p>Esta página te permite probar las importaciones de modelos 3D por separado:</p>
+      <ul>
+        <li><strong>🏠 CASA:</strong> Modelo GLB que se usa como entorno principal</li>
+        <li><strong>🏚️ MANSION:</strong> Modelo OBJ/MTL alternativo para la mansion</li>
+        <li><strong>🥋 JOHNNY CAGE:</strong> Personaje con animaciones GLB</li>
+      </ul>
+      <p>Los resultados aparecerán en la consola del navegador (F12) y en el área de output abajo.</p>
+    </div>
+
+    <div class="warning">
+      <h4>⚠️ Importante</h4>
+      <p>Asegúrate de que el servidor de desarrollo esté ejecutándose (<code>npm run dev</code>) y que los archivos de
+        modelos estén en la carpeta <code>public/assets/model/</code>.</p>
+    </div>
+
+    <!-- Sección de pruebas individuales -->
+    <div class="test-section">
+      <h2>🎯 Pruebas Individuales</h2>
+      <button class="button" onclick="runCasaTest()">🏠 Probar Casa GLB</button>
+      <button class="button" onclick="runMansionTest()">🏚️ Probar Mansion OBJ</button>
+      <button class="button" onclick="runJohnnyTest()">🥋 Probar Johnny Cage</button>
+    </div>
+
+    <!-- Sección de prueba completa -->
+    <div class="test-section">
+      <h2>🚀 Prueba Completa</h2>
+      <button class="button" onclick="runAllTests()" style="font-size: 16px; padding: 15px 30px;">
+        🧪 Ejecutar Todas las Pruebas
+      </button>
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div id="test-status" class="status">Haz clic en "Ejecutar Todas las Pruebas" para comenzar...</div>
+    </div>
+
+    <!-- Consola de output -->
+    <div class="test-section">
+      <h2>📺 Consola de Output</h2>
+      <div id="console-output">Esperando resultados de las pruebas...\n</div>
+      <button class="button" onclick="clearConsole()">🧹 Limpiar Consola</button>
+    </div>
+
+    <!-- Información de rutas -->
+    <div class="test-section">
+      <h2>📂 Rutas de Archivos</h2>
+      <div class="status">
+        📁 Estructura esperada de archivos:
+        public/
+        ├── assets/
+        ├── model/
+        ├── casa/
+        │ └── casa.glb
+        ├── mansion/
+        │ ├── rp_playboymansion_b1.obj
+        │ └── rp_playboymansion_b1.mtl
+        └── JhonnyCage/
+        ├── JhonnyCage_idle.glb
+        ├── JhonnyCage_walk.glb
+        └── JhonnyCage_run.glb
+
+        🔍 El test intentará múltiples rutas automáticamente:
+        - /assets/model/[tipo]/[archivo]
+        - assets/model/[tipo]/[archivo]
+        - public/assets/model/[tipo]/[archivo]
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas oculto para pruebas -->
+  <canvas id="hidden-test-canvas" style="display: none;"></canvas>
+
+  <script type="module">
+    // Importar las funciones de prueba
+    import {
+      testAllImports,
+      testCasaOnly,
+      testMansionOnly,
+      testJohnnyOnly,
+      ImportTester
+    } from '/src/test-imports.ts';
+
+    // Variables globales para la interfaz
+    let currentTester = null;
+    let originalConsoleLog = console.log;
+    let originalConsoleError = console.error;
+    let originalConsoleWarn = console.warn;
+
+    // Redirigir consola a la interfaz
+    function setupConsoleRedirect() {
+      const output = document.getElementById('console-output');
+
+      function addToOutput(message, type = 'log') {
+        const timestamp = new Date().toLocaleTimeString();
+        const prefix = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : '📝';
+        output.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+        output.scrollTop = output.scrollHeight;
+      }
+
+      console.log = function (...args) {
+        originalConsoleLog.apply(console, args);
+        addToOutput(args.join(' '), 'log');
+      };
+
+      console.error = function (...args) {
+        originalConsoleError.apply(console, args);
+        addToOutput(args.join(' '), 'error');
+      };
+
+      console.warn = function (...args) {
+        originalConsoleWarn.apply(console, args);
+        addToOutput(args.join(' '), 'warn');
+      };
+    }
+
+    // Función para actualizar progreso
+    function updateProgress(percentage) {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = percentage + '%';
+    }
+
+    // Función para actualizar estado
+    function updateStatus(message) {
+      const status = document.getElementById('test-status');
+      status.textContent = message;
+    }
+
+    // Funciones de prueba para los botones
+    window.runCasaTest = async function () {
+      updateStatus('🏠 Probando Casa GLB...');
+      updateProgress(0);
+      try {
+        await testCasaOnly();
+        updateProgress(100);
+        updateStatus('🏠 ✅ Prueba de Casa completada - Revisa la consola');
+      } catch (error) {
+        updateStatus('🏠 ❌ Error en prueba de Casa: ' + error.message);
+      }
+    };
+
+    window.runMansionTest = async function () {
+      updateStatus('🏚️ Probando Mansion OBJ...');
+      updateProgress(0);
+      try {
+        await testMansionOnly();
+        updateProgress(100);
+        updateStatus('🏚️ ✅ Prueba de Mansion completada - Revisa la consola');
+      } catch (error) {
+        updateStatus('🏚️ ❌ Error en prueba de Mansion: ' + error.message);
+      }
+    };
+
+    window.runJohnnyTest = async function () {
+      updateStatus('🥋 Probando Johnny Cage...');
+      updateProgress(0);
+      try {
+        await testJohnnyOnly();
+        updateProgress(100);
+        updateStatus('🥋 ✅ Prueba de Johnny completada - Revisa la consola');
+      } catch (error) {
+        updateStatus('🥋 ❌ Error en prueba de Johnny: ' + error.message);
+      }
+    };
+
+    window.runAllTests = async function () {
+      updateStatus('🧪 Iniciando todas las pruebas...');
+      updateProgress(0);
+
+      try {
+        // Simular progreso mientras ejecuta las pruebas
+        const progressSteps = [
+          { step: 10, message: '🧪 Inicializando entorno de prueba...' },
+          { step: 25, message: '🏠 Probando Casa GLB...' },
+          { step: 50, message: '🏚️ Probando Mansion OBJ...' },
+          { step: 75, message: '🥋 Probando Johnny Cage...' },
+          { step: 90, message: '📊 Generando reporte final...' },
+          { step: 100, message: '✅ ¡Todas las pruebas completadas!' }
+        ];
+
+        let currentStep = 0;
+        const progressInterval = setInterval(() => {
+          if (currentStep < progressSteps.length) {
+            const step = progressSteps[currentStep];
+            updateProgress(step.step);
+            updateStatus(step.message);
+            currentStep++;
+          } else {
+            clearInterval(progressInterval);
+          }
+        }, 1000);
+
+        await testAllImports();
+        clearInterval(progressInterval);
+        updateProgress(100);
+        updateStatus('✅ Todas las pruebas completadas - Revisa la consola para detalles');
+
+      } catch (error) {
+        updateStatus('❌ Error ejecutando pruebas: ' + error.message);
+        console.error('Error completo:', error);
+      }
+    };
+
+    window.clearConsole = function () {
+      document.getElementById('console-output').textContent = 'Consola limpiada...\n';
+    };
+
+    // Inicializar al cargar la página
+    setupConsoleRedirect();
+    console.log('🧪 Test de Importaciones cargado correctamente');
+    console.log('📋 Usa los botones arriba para ejecutar las pruebas');
+
+    // Hacer las funciones disponibles globalmente para debug
+    window.testAllImports = testAllImports;
+    window.testCasaOnly = testCasaOnly;
+    window.testMansionOnly = testMansionOnly;
+    window.testJohnnyOnly = testJohnnyOnly;
+    window.ImportTester = ImportTester;
+  </script>
+</body>
+
+</html>

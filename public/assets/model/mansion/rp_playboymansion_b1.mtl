@@ -1,0 +1,834 @@
+newmtl Model001_Material001
+map_Kd rp_playboymansion_b1_material_0.png
+
+newmtl Model001_Material002
+map_Kd rp_playboymansion_b1_material_1.png
+
+newmtl Model001_Material003
+map_Kd rp_playboymansion_b1_material_2.png
+
+newmtl Model001_Material004
+map_Kd rp_playboymansion_b1_material_3.png
+
+newmtl Model001_Material005
+map_Kd rp_playboymansion_b1_material_4.png
+
+newmtl Model001_Material006
+map_Kd rp_playboymansion_b1_material_5.png
+
+newmtl Model001_Material007
+map_Kd rp_playboymansion_b1_material_6.png
+
+newmtl Model001_Material008
+map_Kd rp_playboymansion_b1_material_7.png
+
+newmtl Model001_Material009
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material010
+map_Kd rp_playboymansion_b1_material_9.png
+
+newmtl Model001_Material011
+map_Kd rp_playboymansion_b1_material_10.png
+
+newmtl Model001_Material012
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material013
+map_Kd rp_playboymansion_b1_material_12.png
+
+newmtl Model001_Material014
+map_Kd rp_playboymansion_b1_material_13.png
+
+newmtl Model001_Material015
+map_Kd rp_playboymansion_b1_material_14.png
+
+newmtl Model001_Material016
+map_Kd rp_playboymansion_b1_material_15.png
+
+newmtl Model001_Material017
+map_Kd rp_playboymansion_b1_material_16.png
+
+newmtl Model001_Material018
+map_Kd rp_playboymansion_b1_material_17.png
+
+newmtl Model001_Material019
+map_Kd rp_playboymansion_b1_material_18.png
+
+newmtl Model001_Material020
+map_Kd rp_playboymansion_b1_material_19.png
+
+newmtl Model001_Material021
+map_Kd rp_playboymansion_b1_material_20.png
+
+newmtl Model001_Material022
+map_Kd rp_playboymansion_b1_material_21.png
+
+newmtl Model001_Material023
+map_Kd rp_playboymansion_b1_material_22.png
+
+newmtl Model001_Material024
+map_Kd rp_playboymansion_b1_material_23.png
+
+newmtl Model001_Material025
+map_Kd rp_playboymansion_b1_material_24.png
+
+newmtl Model001_Material026
+map_Kd rp_playboymansion_b1_material_25.png
+
+newmtl Model001_Material027
+map_Kd rp_playboymansion_b1_material_26.png
+
+newmtl Model001_Material028
+map_Kd rp_playboymansion_b1_material_27.png
+
+newmtl Model001_Material029
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material030
+map_Kd rp_playboymansion_b1_material_29.png
+
+newmtl Model001_Material031
+map_Kd rp_playboymansion_b1_material_30.png
+
+newmtl Model001_Material032
+map_Kd rp_playboymansion_b1_material_31.png
+
+newmtl Model001_Material033
+map_Kd rp_playboymansion_b1_material_32.png
+
+newmtl Model001_Material034
+map_Kd rp_playboymansion_b1_material_33.png
+
+newmtl Model001_Material035
+map_Kd rp_playboymansion_b1_material_34.png
+
+newmtl Model001_Material036
+map_Kd rp_playboymansion_b1_material_35.png
+
+newmtl Model001_Material037
+map_Kd rp_playboymansion_b1_material_36.png
+
+newmtl Model001_Material038
+map_Kd rp_playboymansion_b1_material_37.png
+
+newmtl Model001_Material039
+map_Kd rp_playboymansion_b1_material_38.png
+
+newmtl Model001_Material040
+map_Kd rp_playboymansion_b1_material_40.png
+
+newmtl Model001_Material041
+map_Kd rp_playboymansion_b1_material_41.png
+
+newmtl Model001_Material042
+map_Kd rp_playboymansion_b1_material_42.png
+
+newmtl Model001_Material043
+map_Kd rp_playboymansion_b1_material_43.png
+
+newmtl Model001_Material044
+map_Kd rp_playboymansion_b1_material_51.png
+
+newmtl Model001_Material045
+map_Kd rp_playboymansion_b1_material_52.png
+
+newmtl Model001_Material046
+map_Kd rp_playboymansion_b1_material_53.png
+
+newmtl Model001_Material047
+map_Kd rp_playboymansion_b1_material_54.png
+
+newmtl Model001_Material048
+map_Kd rp_playboymansion_b1_material_55.png
+
+newmtl Model001_Material049
+map_Kd rp_playboymansion_b1_material_56.png
+
+newmtl Model001_Material050
+map_Kd rp_playboymansion_b1_material_57.png
+
+newmtl Model001_Material051
+map_Kd rp_playboymansion_b1_material_58.png
+
+newmtl Model001_Material052
+map_Kd rp_playboymansion_b1_material_59.png
+
+newmtl Model001_Material053
+map_Kd rp_playboymansion_b1_material_60.png
+
+newmtl Model001_Material054
+map_Kd rp_playboymansion_b1_material_61.png
+
+newmtl Model001_Material055
+map_Kd rp_playboymansion_b1_material_62.png
+
+newmtl Model001_Material056
+map_Kd rp_playboymansion_b1_material_63.png
+
+newmtl Model001_Material057
+map_Kd rp_playboymansion_b1_material_64.png
+
+newmtl Model001_Material058
+map_Kd rp_playboymansion_b1_material_65.png
+
+newmtl Model001_Material059
+map_Kd rp_playboymansion_b1_material_66.png
+
+newmtl Model001_Material060
+map_Kd rp_playboymansion_b1_material_67.png
+
+newmtl Model001_Material061
+map_Kd rp_playboymansion_b1_material_68.png
+
+newmtl Model001_Material062
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material063
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material064
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material065
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material066
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material067
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material068
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material069
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material070
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material071
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material072
+map_Kd rp_playboymansion_b1_material_60.png
+
+newmtl Model001_Material073
+map_Kd rp_playboymansion_b1_material_60.png
+
+newmtl Model001_Material074
+map_Kd rp_playboymansion_b1_material_60.png
+
+newmtl Model001_Material075
+map_Kd rp_playboymansion_b1_material_70.png
+
+newmtl Model001_Material076
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material077
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material078
+map_Kd rp_playboymansion_b1_material_70.png
+
+newmtl Model001_Material079
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material080
+map_Kd rp_playboymansion_b1_material_69.png
+
+newmtl Model001_Material081
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material082
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material083
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material084
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material085
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material086
+map_Kd rp_playboymansion_b1_material_8.png
+
+newmtl Model001_Material087
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material088
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material089
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material090
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material091
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material092
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material093
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material094
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material095
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material096
+map_Kd rp_playboymansion_b1_material_11.png
+
+newmtl Model001_Material097
+map_Kd rp_playboymansion_b1_material_67.png
+
+newmtl Model001_Material098
+map_Kd rp_playboymansion_b1_material_71.png
+
+newmtl Model001_Material099
+map_Kd rp_playboymansion_b1_material_10.png
+
+newmtl Model001_Material100
+map_Kd rp_playboymansion_b1_material_72.png
+
+newmtl Model001_Material101
+map_Kd rp_playboymansion_b1_material_72.png
+
+newmtl Model001_Material102
+map_Kd rp_playboymansion_b1_material_68.png
+
+newmtl Model001_Material103
+map_Kd rp_playboymansion_b1_material_68.png
+
+newmtl Model001_Material104
+map_Kd rp_playboymansion_b1_material_68.png
+
+newmtl Model001_Material105
+map_Kd rp_playboymansion_b1_material_72.png
+
+newmtl Model001_Material106
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material107
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material108
+map_Kd rp_playboymansion_b1_material_73.png
+
+newmtl Model001_Material109
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material110
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material111
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material112
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material113
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material114
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material115
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material116
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material117
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material118
+map_Kd rp_playboymansion_b1_material_28.png
+
+newmtl Model001_Material119
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material120
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material121
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material122
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material123
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material124
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material125
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material126
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material127
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material128
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material129
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material130
+map_Kd rp_playboymansion_b1_material_74.png
+
+newmtl Model001_Material131
+map_Kd rp_playboymansion_b1_material_75.png
+
+newmtl Model001_Material132
+map_Kd rp_playboymansion_b1_material_75.png
+
+newmtl Model001_Material133
+map_Kd rp_playboymansion_b1_material_75.png
+
+newmtl Model001_Material134
+map_Kd rp_playboymansion_b1_material_75.png
+
+newmtl Model001_Material135
+map_Kd rp_playboymansion_b1_material_75.png
+
+newmtl Model001_Material136
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material137
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material138
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material139
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material140
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material141
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material142
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material143
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material144
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material145
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material146
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material147
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material148
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material149
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material150
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material151
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material152
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material153
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material154
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material155
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material156
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material157
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material158
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material159
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material160
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material161
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material162
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material163
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material164
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material165
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material166
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material167
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material168
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material169
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material170
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material171
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material172
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material173
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material174
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material175
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material176
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material177
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material178
+map_Kd rp_playboymansion_b1_material_76.png
+
+newmtl Model001_Material179
+map_Kd rp_playboymansion_b1_material_77.png
+
+newmtl Model001_Material180
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material181
+map_Kd rp_playboymansion_b1_material_79.png
+
+newmtl Model001_Material182
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material183
+map_Kd rp_playboymansion_b1_material_79.png
+
+newmtl Model001_Material184
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material185
+map_Kd rp_playboymansion_b1_material_79.png
+
+newmtl Model001_Material186
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material187
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material188
+map_Kd rp_playboymansion_b1_material_81.png
+
+newmtl Model001_Material189
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material190
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material191
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material192
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material193
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material194
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material195
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material196
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material197
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material198
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material199
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material200
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material201
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material202
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material203
+map_Kd rp_playboymansion_b1_material_83.png
+
+newmtl Model001_Material204
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material205
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material206
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material207
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material208
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material209
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material210
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material211
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material212
+map_Kd rp_playboymansion_b1_material_84.png
+
+newmtl Model001_Material213
+map_Kd rp_playboymansion_b1_material_85.png
+
+newmtl Model001_Material214
+map_Kd rp_playboymansion_b1_material_85.png
+
+newmtl Model001_Material215
+map_Kd rp_playboymansion_b1_material_85.png
+
+newmtl Model001_Material216
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material217
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material218
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material219
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material220
+map_Kd rp_playboymansion_b1_material_82.png
+
+newmtl Model001_Material221
+map_Kd rp_playboymansion_b1_material_86.png
+
+newmtl Model001_Material222
+map_Kd rp_playboymansion_b1_material_86.png
+
+newmtl Model001_Material223
+map_Kd rp_playboymansion_b1_material_87.png
+
+newmtl Model001_Material224
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material225
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material226
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material227
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material228
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material229
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material230
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material231
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material232
+map_Kd rp_playboymansion_b1_material_88.png
+
+newmtl Model001_Material233
+map_Kd rp_playboymansion_b1_material_89.png
+
+newmtl Model001_Material234
+map_Kd rp_playboymansion_b1_material_89.png
+
+newmtl Model001_Material235
+map_Kd rp_playboymansion_b1_material_89.png
+
+newmtl Model001_Material236
+map_Kd rp_playboymansion_b1_material_90.png
+
+newmtl Model001_Material237
+map_Kd rp_playboymansion_b1_material_91.png
+
+newmtl Model001_Material238
+map_Kd rp_playboymansion_b1_material_91.png
+
+newmtl Model001_Material239
+map_Kd rp_playboymansion_b1_material_92.png
+
+newmtl Model001_Material240
+map_Kd rp_playboymansion_b1_material_93.png
+
+newmtl Model001_Material241
+map_Kd rp_playboymansion_b1_material_93.png
+
+newmtl Model001_Material242
+map_Kd rp_playboymansion_b1_material_94.png
+
+newmtl Model001_Material243
+map_Kd rp_playboymansion_b1_material_94.png
+
+newmtl Model001_Material244
+map_Kd rp_playboymansion_b1_material_95.png
+
+newmtl Model001_Material245
+map_Kd rp_playboymansion_b1_material_95.png
+
+newmtl Model001_Material246
+map_Kd rp_playboymansion_b1_material_96.png
+
+newmtl Model001_Material247
+map_Kd rp_playboymansion_b1_material_96.png
+
+newmtl Model001_Material248
+map_Kd rp_playboymansion_b1_material_96.png
+
+newmtl Model001_Material249
+map_Kd rp_playboymansion_b1_material_96.png
+
+newmtl Model001_Material250
+map_Kd rp_playboymansion_b1_material_97.png
+
+newmtl Model001_Material251
+map_Kd rp_playboymansion_b1_material_98.png
+
+newmtl Model001_Material252
+map_Kd rp_playboymansion_b1_material_99.png
+
+newmtl Model001_Material253
+map_Kd rp_playboymansion_b1_material_100.png
+
+newmtl Model001_Material254
+map_Kd rp_playboymansion_b1_material_101.png
+
+newmtl Model001_Material255
+map_Kd rp_playboymansion_b1_material_101.png
+
+newmtl Model001_Material256
+map_Kd rp_playboymansion_b1_material_102.png
+
+newmtl Model001_Material257
+map_Kd rp_playboymansion_b1_material_103.png
+
+newmtl Model001_Material258
+map_Kd rp_playboymansion_b1_material_103.png
+
+newmtl Model001_Material259
+map_Kd rp_playboymansion_b1_material_104.png
+
+newmtl Model001_Material260
+map_Kd rp_playboymansion_b1_material_104.png
+
+newmtl Model001_Material261
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material262
+map_Kd rp_playboymansion_b1_material_105.png
+
+newmtl Model001_Material263
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material264
+map_Kd rp_playboymansion_b1_material_79.png
+
+newmtl Model001_Material265
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material266
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material267
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material268
+map_Kd rp_playboymansion_b1_material_78.png
+
+newmtl Model001_Material269
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material270
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material271
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material272
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material273
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material274
+map_Kd rp_playboymansion_b1_material_80.png
+
+newmtl Model001_Material275
+map_Kd rp_playboymansion_b1_material_106.png
+
+newmtl Model001_Material276
+map_Kd rp_playboymansion_b1_material_106.png
+
+newmtl Model001_Material277
+map_Kd rp_playboymansion_b1_material_106.png
+
+newmtl Model001_Material278
+map_Kd rp_playboymansion_b1_material_106.png
+

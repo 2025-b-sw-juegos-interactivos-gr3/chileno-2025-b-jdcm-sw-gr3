@@ -1,0 +1,11 @@
+Model Information:
+* title:	Worker Ant Animation
+* source:	https://sketchfab.com/3d-models/worker-ant-animation-df93e4c92ff74dfc81ae9a713baeb9bc
+* author:	Komojo (https://sketchfab.com/Komojo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Worker Ant Animation" (https://sketchfab.com/3d-models/worker-ant-animation-df93e4c92ff74dfc81ae9a713baeb9bc) by Komojo (https://sketchfab.com/Komojo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

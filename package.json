@@ -16,8 +16,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babylonjs/core": "7.11.0",
-    "@babylonjs/loaders": "7.11.0"
+    "@babylonjs/core": "^8.36.0",
+    "@babylonjs/loaders": "^8.36.0",
+    "@types/cannon": "^0.1.13",
+    "cannon": "^0.6.2"
   },
   "devDependencies": {
     "@types/node": "24.9.1",

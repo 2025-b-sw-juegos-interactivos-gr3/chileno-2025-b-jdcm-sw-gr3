@@ -13,8 +13,8 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      font-family: 'Courier New', monospace;
-      background: #000;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      background: linear-gradient(45deg, #2d5016, #4a7c59);
     }
 
     #renderCanvas {
@@ -29,22 +29,48 @@
       left: 20px;
       top: 20px;
       z-index: 10;
-      color: #ff4444;
-      text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+      color: #8B4513;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
       pointer-events: none;
+      background: rgba(255, 248, 220, 0.9);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border: 3px solid #8B4513;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
 
     .overlay h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 28px;
       font-weight: bold;
-      letter-spacing: 2px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .overlay .ant-icon {
+      font-size: 32px;
+      animation: antWalk 2s ease-in-out infinite;
+    }
+
+    @keyframes antWalk {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX(5px);
+      }
     }
 
     .overlay p {
-      margin: 5px 0;
-      font-size: 12px;
+      margin: 8px 0 0 0;
+      font-size: 14px;
       opacity: 0.8;
+      font-style: italic;
     }
 
     .controls {
@@ -52,34 +78,203 @@
       right: 20px;
       top: 20px;
       z-index: 10;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 15px;
-      border-radius: 5px;
-      font-size: 12px;
-      border: 1px solid #ff4444;
+      color: #2d5016;
+      background: rgba(255, 248, 220, 0.95);
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      border: 3px solid #8B4513;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       pointer-events: none;
+      min-width: 200px;
     }
 
     .controls h3 {
-      margin: 0 0 10px 0;
-      color: #ff4444;
-      font-size: 14px;
+      margin: 0 0 12px 0;
+      color: #8B4513;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 2px solid #8B4513;
+      padding-bottom: 5px;
     }
 
     .controls ul {
       margin: 0;
-      padding: 0 0 0 20px;
+      padding: 0;
       list-style: none;
     }
 
     .controls li {
-      margin: 3px 0;
+      margin: 8px 0;
+      padding: 5px 8px;
+      background: rgba(139, 69, 19, 0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .controls li::before {
-      content: "▸ ";
-      color: #ff4444;
+      content: "🐜";
+      font-size: 16px;
+    }
+
+    .game-hud {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      z-index: 10;
+      background: rgba(255, 248, 220, 0.95);
+      padding: 15px 20px;
+      border-radius: 12px;
+      border: 3px solid #8B4513;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #2d5016;
+      font-weight: bold;
+      min-width: 200px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      padding: 8px;
+      background: rgba(139, 69, 19, 0.1);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .status-item:hover {
+      background: rgba(139, 69, 19, 0.2);
+      transform: translateX(5px);
+    }
+
+    .status-icon {
+      font-size: 20px;
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: rgba(255, 248, 220, 0.95);
+      padding: 12px 25px;
+      border-radius: 25px;
+      border: 3px solid #8B4513;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      color: #2d5016;
+      font-weight: bold;
+      text-align: center;
+      min-width: 250px;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 8px;
+      transition: width 0.5s ease;
+      box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+    }
+
+    .mini-map {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      z-index: 10;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 248, 220, 0.95);
+      border: 3px solid #8B4513;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .mini-map-title {
+      text-align: center;
+      padding: 5px;
+      background: #8B4513;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .mini-map-content {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 30px);
+      background: linear-gradient(45deg, #90EE90, #98FB98);
+    }
+
+    .map-ant {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #8B4513;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.1s ease;
+    }
+
+    .map-food {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #FF6B35;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: foodPulse 2s ease-in-out infinite;
+    }
+
+    .map-home {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #8B4513;
+      border-radius: 20% 20% 60% 60%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    @keyframes foodPulse {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+
+    .notification {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 200;
+      background: rgba(255, 248, 220, 0.98);
+      padding: 20px 30px;
+      border-radius: 15px;
+      border: 3px solid #4CAF50;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      color: #2d5016;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+      transition: all 0.3s ease;
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     #loadingScreen {
@@ -88,28 +283,59 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000;
+      background: linear-gradient(135deg, #2d5016, #4a7c59, #6b8e23);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 100;
-      color: #ff4444;
+      color: #fff;
     }
 
     #loadingScreen h2 {
       margin-bottom: 20px;
-      font-size: 32px;
-      letter-spacing: 3px;
+      font-size: 36px;
+      letter-spacing: 2px;
+      color: #FFE4B5;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .ant-loader {
+      font-size: 40px;
+      animation: antMove 1.5s ease-in-out infinite;
+    }
+
+    @keyframes antMove {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      25% {
+        transform: translateY(-10px) rotate(5deg);
+      }
+
+      50% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      75% {
+        transform: translateY(-5px) rotate(-5deg);
+      }
     }
 
     .loader {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #333;
-      border-top-color: #ff4444;
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #FFE4B5;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
+      animation: spin 1.2s linear infinite;
+      margin: 20px 0;
     }
 
     @keyframes spin {
@@ -121,43 +347,299 @@
     #loadingScreen.hidden {
       display: none;
     }
+
+    .loading-tips {
+      margin-top: 30px;
+      text-align: center;
+      color: #FFE4B5;
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    .loading-tips p {
+      margin: 8px 0;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeInOut {
+
+      0%,
+      100% {
+        opacity: 0.7;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div id="loadingScreen">
-    <h2>HORROR MANSION 3D</h2>
+    <h2>
+      <span class="ant-loader">🐜</span>
+      AVENTURA DE LA HORMIGA
+      <span class="ant-loader">🐜</span>
+    </h2>
     <div class="loader"></div>
-    <p style="margin-top: 20px; font-size: 14px;">Cargando modelos y texturas...</p>
+    <div class="loading-tips">
+      <p>🍯 Cargando modelos de alimentos...</p>
+      <p>🏠 Preparando el hormiguero...</p>
+      <p>🌳 Construyendo el mundo...</p>
+    </div>
+  </div>
+
+  <div class="progress-bar">
+    <div>🐜 Alimentos Recolectados: <span id="foodCounter">0</span>/4</div>
+    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
   </div>
 
   <div class="overlay">
-    <h1>🎃 HORROR MANSION</h1>
+    <h1>
+      <span class="ant-icon">🐜</span>
+      TRABAJADORA HORMIGA
+    </h1>
+    <p>Recolecta todos los alimentos y llévalos al hormiguero</p>
   </div>
 
   <div class="controls">
-    <h3>CONTROLES</h3>
+    <h3>🎮 CONTROLES</h3>
     <ul>
-      <li>↑ ↓ Mover</li>
-      <li>← → Rotar</li>
-      <li>Shift + ↑↓ Correr</li>
-      <li>Espacio - Ataque</li>
-      <li>L - Linterna</li>
-      <li>C - Modo creador</li>
-      <li>Código Konami: ↑↓↑↓←→←→BA</li>
+      <li>WASD - Mover hormiga</li>
+      <li>F - Recoger/Entregar alimento</li>
+      <li>Mouse - Rotar cámara</li>
+      <li>Scroll - Zoom</li>
     </ul>
+  </div>
+
+  <div class="game-hud">
+    <div class="status-item">
+      <span class="status-icon">📦</span>
+      <span id="carryStatus">Sin carga</span>
+    </div>
+    <div class="status-item">
+      <span class="status-icon">🏠</span>
+      <span id="distanceToHome">Distancia al hormiguero: --</span>
+    </div>
+    <div class="status-item">
+      <span class="status-icon">⏱️</span>
+      <span id="gameTime">Tiempo: 00:00</span>
+    </div>
+  </div>
+
+  <div class="mini-map">
+    <div class="mini-map-title">🗺️ MAPA</div>
+    <div class="mini-map-content" id="miniMapContent">
+      <div class="map-home" id="mapHome"></div>
+      <div class="map-ant" id="mapAnt"></div>
+    </div>
   </div> <canvas id="renderCanvas"></canvas>
 
   <!-- Entrada modular (Vite + TypeScript) -->
   <script type="module" src="/src/main.ts"></script>
 
   <script>
+    // Variables de juego para la UI
+    let gameStartTime = Date.now();
+    let foodCollected = 0;
+    let totalFood = 4;
+    let mapFoodElements = [];
+
+    // Función para mostrar notificaciones
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      notification.innerHTML = message;
+
+      if (type === 'success') {
+        notification.style.borderColor = '#4CAF50';
+      } else if (type === 'pickup') {
+        notification.style.borderColor = '#FF9800';
+      }
+
+      document.body.appendChild(notification);
+
+      // Mostrar con animación
+      setTimeout(() => notification.classList.add('show'), 10);
+
+      // Ocultar después de 2 segundos
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 2000);
+    }
+
+    // Función para actualizar el mini-mapa
+    function updateMiniMap(antPos, homePos, foodPositions) {
+      const mapAnt = document.getElementById('mapAnt');
+      const mapHome = document.getElementById('mapHome');
+      const mapContent = document.getElementById('miniMapContent');
+
+      if (!mapAnt || !mapHome || !mapContent) return;
+
+      // Escala del mapa (ajustar según el tamaño del mundo del juego)
+      const mapScale = 10;
+      const mapWidth = 144; // 150px - 6px de padding
+      const mapHeight = 114; // 150px - 30px de título - 6px de padding
+
+      // Convertir posiciones del mundo 3D a coordenadas del mini-mapa
+      const antMapX = (antPos.x / mapScale) * mapWidth + mapWidth / 2;
+      const antMapY = (antPos.z / mapScale) * mapHeight + mapHeight / 2;
+      const homeMapX = (homePos.x / mapScale) * mapWidth + mapWidth / 2;
+      const homeMapY = (homePos.z / mapScale) * mapHeight + mapHeight / 2;
+
+      // Limitar a los bordes del mapa
+      mapAnt.style.left = Math.max(0, Math.min(mapWidth, antMapX)) + 'px';
+      mapAnt.style.top = Math.max(0, Math.min(mapHeight, antMapY)) + 'px';
+      mapHome.style.left = Math.max(0, Math.min(mapWidth, homeMapX)) + 'px';
+      mapHome.style.top = Math.max(0, Math.min(mapHeight, homeMapY)) + 'px';
+
+      // Actualizar posiciones de alimentos
+      foodPositions.forEach((foodPos, index) => {
+        if (!mapFoodElements[index]) {
+          const foodElement = document.createElement('div');
+          foodElement.className = 'map-food';
+          mapContent.appendChild(foodElement);
+          mapFoodElements[index] = foodElement;
+        }
+
+        if (foodPos.visible) {
+          const foodMapX = (foodPos.x / mapScale) * mapWidth + mapWidth / 2;
+          const foodMapY = (foodPos.z / mapScale) * mapHeight + mapHeight / 2;
+
+          mapFoodElements[index].style.left = Math.max(0, Math.min(mapWidth, foodMapX)) + 'px';
+          mapFoodElements[index].style.top = Math.max(0, Math.min(mapHeight, foodMapY)) + 'px';
+          mapFoodElements[index].style.display = 'block';
+        } else {
+          mapFoodElements[index].style.display = 'none';
+        }
+      });
+    }
+
+    // Función para actualizar el contador de alimentos
+    function updateFoodCounter(collected) {
+      foodCollected = collected;
+      const counter = document.getElementById('foodCounter');
+      const progressFill = document.getElementById('progressFill');
+
+      if (counter) counter.textContent = collected;
+      if (progressFill) {
+        const percentage = (collected / totalFood) * 100;
+        progressFill.style.width = percentage + '%';
+      }
+
+      // Mostrar notificaciones
+      if (collected > 0 && collected < totalFood) {
+        showNotification(`🍯 ¡Alimento entregado! (${collected}/${totalFood})`, 'success');
+      }
+
+      // Mostrar mensaje de victoria si se recolectaron todos
+      if (collected >= totalFood) {
+        showVictoryMessage();
+      }
+    }
+
+    // Función para actualizar el estado de carga
+    function updateCarryStatus(isCarrying) {
+      const status = document.getElementById('carryStatus');
+      if (status) {
+        status.textContent = isCarrying ? 'Cargando alimento 🍯' : 'Sin carga';
+        status.style.color = isCarrying ? '#4CAF50' : '#666';
+      }
+
+      if (isCarrying) {
+        showNotification('📦 ¡Alimento recogido! Llévalo al hormiguero', 'pickup');
+      }
+    }
+
+    // Función para actualizar la distancia al hormiguero
+    function updateDistanceToHome(distance) {
+      const distanceElement = document.getElementById('distanceToHome');
+      if (distanceElement) {
+        distanceElement.textContent = `Distancia al hormiguero: ${distance.toFixed(1)}m`;
+      }
+    }
+
+    // Actualizar tiempo de juego
+    function updateGameTime() {
+      const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      const timeElement = document.getElementById('gameTime');
+
+      if (timeElement) {
+        timeElement.textContent = `Tiempo: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }
+
+    // Función para mostrar mensaje de victoria
+    function showVictoryMessage() {
+      const overlay = document.createElement('div');
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        color: #FFE4B5;
+        text-align: center;
+      `;
+
+      const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+
+      overlay.innerHTML = `
+        <h1 style="font-size: 48px; margin-bottom: 20px; color: #4CAF50;">
+          🎉 ¡MISIÓN CUMPLIDA! 🎉
+        </h1>
+        <p style="font-size: 24px; margin-bottom: 10px;">
+          🐜 ¡Has recolectado todos los alimentos para la colonia! 🐜
+        </p>
+        <p style="font-size: 18px; margin-bottom: 30px;">
+          ⏱️ Tiempo total: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}
+        </p>
+        <button onclick="location.reload()" style="
+          background: #4CAF50;
+          color: white;
+          border: none;
+          padding: 15px 30px;
+          font-size: 18px;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: background 0.3s;
+        " onmouseover="this.style.background='#45a049'" onmouseout="this.style.background='#4CAF50'">
+          🔄 Jugar de nuevo
+        </button>
+      `;
+
+      document.body.appendChild(overlay);
+    }
+
+    // Exponer funciones globalmente para que el juego las pueda usar
+    window.gameUI = {
+      updateFoodCounter,
+      updateCarryStatus,
+      updateDistanceToHome,
+      updateMiniMap
+    };
+
+    // Actualizar tiempo cada segundo
+    setInterval(updateGameTime, 1000);
+
     // Ocultar pantalla de carga cuando todo esté listo
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loadingScreen = document.getElementById('loadingScreen');
         loadingScreen.classList.add('hidden');
-      }, 2000);
+      }, 3000); // Aumenté el tiempo para mostrar mejor las tips
     });
   </script>
 </body>

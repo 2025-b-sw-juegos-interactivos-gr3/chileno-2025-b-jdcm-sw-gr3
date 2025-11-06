@@ -1,476 +1,245 @@
-import {
-  AbstractMesh,
-  AnimationGroup,
-  Color3,
-  MeshBuilder,
-  Scene,
-  SceneLoader,
-  StandardMaterial,
-  Vector3,
-} from '@babylonjs/core';
-// Registrar loader GLTF/GLB
-import '@babylonjs/loaders/glTF';
-
-import type { AnimationSystem, CharacterConfig, CharacterState } from '../types';
+import { Scene, Vector3, TransformNode, AbstractMesh, AnimationGroup, PhysicsImpostor, Mesh, MeshBuilder } from "@babylonjs/core";
+import { loadGLTF, LoadedModel } from "../utils/modelLoader";
 
 /**
- * Clase para manejar un personaje con animaciones
- * ⚠️  SOLO SOPORTA FORMATO GLB - NO OTROS FORMATOS ⚠️
+ * AntCharacter: envolverá el modelo de la hormiga y proveerá métodos simples
+ * para posicionar, llevar y soltar objetos.
  */
-export class Character {
-  public mesh: AbstractMesh | null = null;
-  public animations: AnimationSystem = {
-    idle: null,
-    walk: null,
-    run: null,
-    current: null,
-  };
-  public state: CharacterState = {
-    currentAnimation: 'idle',
-    isAnimating: false,
-    health: 100,
-    maxHealth: 100,
-    speed: 1.0,
-  };
+export class AntCharacter {
+  private scene: Scene;
+  public root: TransformNode | null = null;
+  private carrying: AbstractMesh | null = null;
+  private animationGroups: AnimationGroup[] = [];
+  private standAnim: AnimationGroup | null = null;
+  private walkAnim: AnimationGroup | null = null;
+  private runAnim: AnimationGroup | null = null;
+  private currentAnim: AnimationGroup | null = null;
+  private physicsImpostor: PhysicsImpostor | null = null;
+  private physicsEnabled: boolean = false;	constructor(scene: Scene) {
+		this.scene = scene;
+	}
 
-  constructor(private config: CharacterConfig, private scene: Scene) {
-    // Validar que todos los archivos de animación sean GLB
-    this.validateGLBFiles();
-
-    // Verificar que el loader GLB esté disponible
-    this.checkGLBLoader();
+  /** Carga el GLTF de la hormiga y devuelve la instancia */
+  async load(rootUrl: string, fileName: string, scaling = 1, rotation?: Vector3): Promise<this> {
+    const res: LoadedModel = await loadGLTF(this.scene, rootUrl, fileName, rotation);
+    this.root = res.root;
+    this.animationGroups = res.animationGroups || [];
+    
+    // Inicializar las animaciones específicas
+    this.initializeAnimations();
+    
+    if (this.root && scaling !== 1) {
+      this.root.scaling = this.root.scaling.scaleInPlace(scaling);
+    }
+    return this;
   }
 
-  /**
-   * Verifica que el loader GLB esté disponible
-   */
-  private checkGLBLoader(): void {
-    console.log('🔍 Verificando disponibilidad de loaders...');
+  /** Inicializa las animaciones específicas de la hormiga */
+  private initializeAnimations() {
+    // Buscar las animaciones por nombre
+    this.standAnim = this.animationGroups.find(anim => 
+      anim.name === "Leafka Armature|Leafka Stand"
+    ) || null;
+    
+    this.walkAnim = this.animationGroups.find(anim => 
+      anim.name === "Leafka Armature|Leafka Walk"
+    ) || null;
 
-    // Verificar múltiples extensiones GLTF/GLB
-    const gltfAvailable = SceneLoader.IsPluginForExtensionAvailable('.gltf');
-    const glbAvailable = SceneLoader.IsPluginForExtensionAvailable('.glb');
+    // Buscar animación de correr (si existe)
+    this.runAnim = this.animationGroups.find(anim => 
+      anim.name.toLowerCase().includes("run") || 
+      anim.name.toLowerCase().includes("correr")
+    ) || null;
 
-    console.log(`📦 Loader .gltf disponible: ${gltfAvailable}`);
-    console.log(`📦 Loader .glb disponible: ${glbAvailable}`);
+    // Debug: mostrar todas las animaciones disponibles
+    console.log("Animaciones disponibles:");
+    this.animationGroups.forEach((anim, index) => {
+      console.log(`${index}: ${anim.name}`);
+    });
 
-    if (!gltfAvailable && !glbAvailable) {
-      console.error('❌ NINGÚN LOADER GLTF/GLB ESTÁ DISPONIBLE');
-      console.log('💡 Esto puede deberse a:');
-      console.log('   - babylonjs-loaders no está instalado correctamente');
-      console.log('   - El import no se está cargando antes de usar SceneLoader');
-      console.log('   - Problema de bundling con Vite');
+    // Verificar que se encontraron las animaciones
+    if (this.standAnim) {
+      console.log("✓ Animación Stand encontrada:", this.standAnim.name);
     } else {
-      console.log('✅ Al menos un loader GLTF/GLB está disponible');
-    }
-  }
-
-  /**
-   * Valida que todos los archivos de configuración sean formato GLB
-   */
-  private validateGLBFiles(): void {
-    const animFiles = Object.values(this.config.animations);
-    const nonGLBFiles = animFiles.filter((file) => !file.toLowerCase().endsWith('.glb'));
-
-    if (nonGLBFiles.length > 0) {
-      console.error(`❌ ARCHIVOS NO GLB DETECTADOS:`, nonGLBFiles);
-      throw new Error(
-        `Character solo soporta archivos GLB. Archivos inválidos: ${nonGLBFiles.join(', ')}`
-      );
+      console.warn("✗ Animación Stand no encontrada");
     }
 
-    console.log(`✅ Validación GLB: Todos los archivos son formato GLB correcto`);
+    if (this.walkAnim) {
+      console.log("✓ Animación Walk encontrada:", this.walkAnim.name);
+    } else {
+      console.warn("✗ Animación Walk no encontrada");
+    }
+
+    if (this.runAnim) {
+      console.log("✓ Animación Run encontrada:", this.runAnim.name);
+    } else {
+      console.log("ℹ Animación Run no encontrada, se usará Walk con velocidad aumentada");
+    }
+
+    // Iniciar con la animación de stand
+    if (this.standAnim) {
+      this.playStandAnimation();
+    }
+  }	setPosition(pos: Vector3) {
+		if (!this.root) return;
+		this.root.position.copyFrom(pos);
+	}
+
+	getPosition(): Vector3 {
+		return this.root ? this.root.position.clone() : Vector3.Zero();
+	}
+
+	carry(mesh: AbstractMesh) {
+		if (!this.root) return;
+		mesh.setParent(this.root);
+		// Colocar el objeto encima de la hormiga (ajustable)
+		mesh.position = new Vector3(0, 0.5, 0);
+		this.carrying = mesh;
+	}
+
+	dropAt(position: Vector3) {
+		if (!this.carrying) return;
+		const m = this.carrying;
+		m.setParent(null);
+		m.position.copyFrom(position);
+		this.carrying = null;
+	}
+
+	isCarrying() {
+		return !!this.carrying;
+	}
+
+  getCarriedMesh(): AbstractMesh | null {
+    return this.carrying;
   }
 
-  /**
-   * Carga el personaje y sus animaciones usando formato GLB exclusivamente
-   */
-  async load(): Promise<void> {
-    try {
-      console.log(`🎭 CARGANDO PERSONAJE ${this.config.name.toUpperCase()}`);
-      const { modelPath, animations } = this.config;
+  playStandAnimation() {
+    if (!this.standAnim) return;
+    if (this.currentAnim === this.standAnim) return;
+    
+    // Detener la animación actual
+    if (this.currentAnim) {
+      this.currentAnim.stop();
+    }
+    
+    // Reproducir animación de stand
+    this.standAnim.start(true, 1.0, this.standAnim.from, this.standAnim.to, false);
+    this.currentAnim = this.standAnim;
+  }
 
-      // Cargar el modelo base (que contiene el mesh y la animación 'idle')
-      console.log(`🔄 Cargando modelo base: ${animations.idle}`);
-      const baseResult = await this.loadModelGLB(modelPath, animations.idle);
+  playWalkAnimation() {
+    if (!this.walkAnim) return;
+    if (this.currentAnim === this.walkAnim) return;
+    
+    // Detener la animación actual
+    if (this.currentAnim) {
+      this.currentAnim.stop();
+    }
+    
+    // Reproducir animación de caminar
+    this.walkAnim.start(true, 1.0, this.walkAnim.from, this.walkAnim.to, false);
+    this.currentAnim = this.walkAnim;
+  }
 
-      if (baseResult.success && baseResult.mesh) {
-        this.mesh = baseResult.mesh;
-        this.setupMesh();
-
-        // La primera animación cargada es 'idle'
-        if (baseResult.animationGroups.length > 0) {
-          this.animations.idle = baseResult.animationGroups[0];
-          this.animations.idle.name = 'idle';
-          console.log(`✅ Animación 'idle' encontrada en el modelo base.`);
-        }
-
-        // Cargar las animaciones restantes
-        await this.loadAdditionalAnimationsGLB();
-
-        this.playAnimation('idle');
-        console.log(`✅ PERSONAJE ${this.config.name.toUpperCase()} CARGADO COMPLETAMENTE`);
-      } else {
-        throw new Error(`No se pudo cargar el modelo base. Detalles: ${baseResult.error}`);
+  playRunAnimation() {
+    // Si existe animación específica de correr, usarla
+    if (this.runAnim) {
+      if (this.currentAnim === this.runAnim) return;
+      
+      // Detener la animación actual
+      if (this.currentAnim) {
+        this.currentAnim.stop();
       }
-    } catch (error) {
-      console.error(`❌ Error cargando personaje ${this.config.name}:`, error);
-      this.createFallbackModel();
-    }
-  }
-
-  /**
-   * Carga animaciones adicionales y las aplica al personaje.
-   */
-  private async loadAdditionalAnimationsGLB(): Promise<void> {
-    console.log(`🎬 Cargando animaciones adicionales...`);
-    const { modelPath, animations } = this.config;
-
-    const animsToLoad = [
-      { key: 'walk', file: animations.walk },
-      { key: 'run', file: animations.run },
-    ];
-
-    for (const anim of animsToLoad) {
-      if (!anim.file) continue;
-
-      console.log(`🔄 Cargando animación '${anim.key}' desde ${anim.file}`);
-      const result = await this.loadAnimationGLB(modelPath, anim.file, anim.key);
-      if (result.success && result.animationGroup) {
-        this.animations[anim.key as keyof AnimationSystem] = result.animationGroup;
-        console.log(`✅ Animación '${anim.key}' cargada.`);
-      } else {
-        console.warn(`⚠️ Fallo al cargar animación '${anim.key}': ${result.error}`);
+      
+      // Reproducir animación de correr
+      this.runAnim.start(true, 1.0, this.runAnim.from, this.runAnim.to, false);
+      this.currentAnim = this.runAnim;
+    } else {
+      // Si no hay animación de correr, usar walk pero más rápida
+      if (!this.walkAnim) return;
+      if (this.currentAnim === this.walkAnim && this.currentAnim.speedRatio === 2.0) return;
+      
+      // Detener la animación actual
+      if (this.currentAnim) {
+        this.currentAnim.stop();
       }
+      
+      // Reproducir animación de caminar más rápida
+      this.walkAnim.start(true, 2.0, this.walkAnim.from, this.walkAnim.to, false);
+      this.currentAnim = this.walkAnim;
     }
   }
 
-  /**
-   * Crea un modelo básico si fallan todos los métodos de carga
-   */
-  private createFallbackModel(): void {
-    console.log(`🎭 ========================================`);
-    console.log(`🎭 CREANDO MODELO DE RESPALDO PARA ${this.config.name}`);
-    console.log(`🎭 ========================================`);
-
-    // Crear un modelo básico tipo cápsula más visible
-    this.mesh = MeshBuilder.CreateCapsule(
-      `${this.config.name}_fallback`,
-      { height: 2, radius: 0.5 },
-      this.scene
-    );
-
-    // Material más llamativo para el modelo de respaldo
-    const material = new StandardMaterial(`${this.config.name}_mat`, this.scene);
-    material.diffuseColor = new Color3(1.0, 0.5, 0.2); // Color naranja brillante
-    material.emissiveColor = new Color3(0.2, 0.1, 0.0); // Ligero brillo
-    this.mesh.material = material;
-
-    this.setupMesh();
-
-    console.log(`✅ Modelo de respaldo creado para ${this.config.name}`);
-    console.log(`📍 Posición: ${this.mesh.position.toString()}`);
-    console.log(`📏 Escalado: ${this.mesh.scaling.toString()}`);
-    console.log(`🎭 ========================================`);
-  }
-
-  /**
-   * Configura el mesh del personaje
-   */
-  private setupMesh(): void {
-    if (!this.mesh) return;
-
-    this.mesh.scaling = this.config.scale.clone();
-    this.mesh.position = this.config.position.clone();
-    this.mesh.checkCollisions = true;
-    // Configurar elipsoid para colisiones con paredes del laberinto
-    // Valores razonables para un personaje ~1.8m alto
-    (this.mesh as any).ellipsoid = new Vector3(0.4, 0.9, 0.4);
-    (this.mesh as any).ellipsoidOffset = new Vector3(0, 0.9, 0);
-
-    // No rotar inicialmente - la rotación será controlada por la cámara
-    this.mesh.rotation.y = 0;
-
-    console.log(
-      `🎭 Mesh configurado - Escalado: ${this.mesh.scaling.toString()}, Posición: ${this.mesh.position.toString()}`
-    );
-  }
-
-  /**
-   * Preserva el escalado del personaje
-   */
-  private preserveScaling(): void {
-    if (!this.mesh) return;
-
-    this.mesh.scaling = this.config.scale.clone();
-    console.log(`📐 Escalado preservado: ${this.mesh.scaling.toString()}`);
-  }
-
-  /**
-   * Reproduce una animación específica with validación mejorada
-   */
-  playAnimation(animationName: keyof AnimationSystem): void {
-    const animation = this.animations[animationName];
-
-    if (!animation) {
-      console.warn(`⚠️ Animación ${animationName} no encontrada para ${this.config.name}`);
-      console.log(
-        `📋 Animaciones disponibles:`,
-        Object.keys(this.animations).filter(
-          (key) => key !== 'current' && this.animations[key as keyof AnimationSystem]
-        )
-      );
-      return;
-    }
-
-    // Detener animación actual
-    if (this.animations.current && this.animations.current !== animation) {
-      this.animations.current.stop();
-    }
-
-    // Reproducir nueva animación
-    animation.start(true, 1.0, animation.from, animation.to, false);
-    this.animations.current = animation;
-    this.state.currentAnimation = animationName;
-    this.state.isAnimating = true;
-
-    // Preservar escalado después de cambiar animación
-    this.preserveScaling();
-
-    console.log(`🎬 Reproduciendo animación: ${animationName} (${animation.name})`);
-  }
-
-  /**
-   * Valida que todas las animaciones GLB estén cargadas correctamente
-   */
-  validateAnimations(): boolean {
-    const requiredAnimations = ['idle', 'walk', 'run'] as const;
-    const missingAnimations: string[] = [];
-
-    console.log(`🔍 ========================================`);
-    console.log(`🔍 VALIDANDO ANIMACIONES DE ${this.config.name.toUpperCase()}`);
-    console.log(`🔍 ========================================`);
-
-    for (const animName of requiredAnimations) {
-      if (this.animations[animName]) {
-        console.log(`✅ ${animName}: OK`);
-      } else {
-        console.log(`❌ ${animName}: FALTANTE`);
-        missingAnimations.push(animName);
-      }
-    }
-
-    const isValid = missingAnimations.length === 0;
-    console.log(`🔍 ========================================`);
-    console.log(
-      `📊 RESULTADO: ${
-        isValid ? '✅ TODAS LAS ANIMACIONES OK' : `❌ FALTAN: ${missingAnimations.join(', ')}`
-      }`
-    );
-    console.log(`🔍 ========================================`);
-
-    return isValid;
-  }
-
-  /**
-   * Detiene todas las animaciones
-   */
-  stopAnimations(): void {
-    Object.values(this.animations).forEach((anim) => {
-      if (anim) anim.stop();
-    });
-    this.state.isAnimating = false;
-  }
-
-  /**
-   * Actualiza el personaje basado en el estado del movimiento
-   */
-  updateAnimation(isMoving: boolean, isRunning: boolean): void {
-    if (!isMoving && this.state.currentAnimation !== 'idle') {
-      this.playAnimation('idle');
-    } else if (isMoving && isRunning && this.state.currentAnimation !== 'run') {
-      this.playAnimation('run');
-    } else if (isMoving && !isRunning && this.state.currentAnimation !== 'walk') {
-      this.playAnimation('walk');
+  /** Controla la velocidad de la animación actual */
+  setAnimationSpeed(speed: number) {
+    if (this.currentAnim) {
+      this.currentAnim.speedRatio = speed;
     }
   }
 
-  /**
-   * Mueve el personaje en la dirección especificada
-   */
-  move(direction: Vector3, speed: number, deltaTime: number = 1 / 60): void {
-    if (!this.mesh) {
-      console.warn('⚠️ No se puede mover: mesh no encontrado');
-      return;
-    }
-
-    // Validar inputs
-    if (direction.length() === 0) {
-      console.warn('⚠️ Vector de dirección es cero');
-      return;
-    }
-
-    if (speed <= 0) {
-      console.warn('⚠️ Velocidad es cero o negativa:', speed);
-      return;
-    }
-
-    // Usar deltaTime más estable y asegurar movimiento mínimo
-    const safeDeltaTime = Math.max(Math.min(deltaTime, 0.1), 0.016); // Entre 16ms y 100ms
-
-    // Calcular movimiento más robusto
-    const normalizedDirection = direction.normalize();
-    const movement = normalizedDirection.scale(speed * safeDeltaTime);
-
-    // Verificar que el movimiento sea significativo
-    if (movement.length() < 0.001) {
-      console.warn('⚠️ Movimiento demasiado pequeño:', movement.length());
-      return;
-    }
-
-    const oldPosition = this.mesh.position.clone();
-    // Usar colisiones del motor para evitar atravesar paredes del laberinto
-    try {
-      this.mesh.moveWithCollisions(movement);
-    } catch {
-      // Fallback en caso de que falle el sistema de colisiones
-      this.mesh.position.addInPlace(movement);
-    }
-
-    // Preservar escalado después del movimiento
-    this.preserveScaling();
-
-    console.log(
-      '🏃 Johnny movido desde:',
-      oldPosition.toString(),
-      'a:',
-      this.mesh.position.toString()
-    );
-    console.log(
-      '📏 Distancia movida:',
-      movement.length(),
-      'Velocidad aplicada:',
-      speed,
-      'deltaTime:',
-      safeDeltaTime
-    );
+  /** Obtiene la velocidad actual de la animación */
+  getAnimationSpeed(): number {
+    return this.currentAnim ? this.currentAnim.speedRatio : 1.0;
   }
 
-  /**
-   * Establece la rotación del personaje para que mire en una dirección específica
-   */
-  setRotation(rotationY: number): void {
-    if (!this.mesh) return;
+  /** Métodos de conveniencia para velocidades comunes */
+  slowMotion() { this.setAnimationSpeed(0.5); }
+  normalSpeed() { this.setAnimationSpeed(1.0); }
+  fastMotion() { this.setAnimationSpeed(2.0); }
 
-    this.mesh.rotation.y = rotationY;
+  /** Habilita la física para la hormiga */
+  enablePhysics() {
+    if (!this.root || this.physicsEnabled) return;
+    
+    // Crear un mesh box simple para la física de la hormiga
+    const antPhysicsMesh = MeshBuilder.CreateBox("antPhysics", {
+      width: 0.3,
+      height: 0.5,
+      depth: 0.3
+    }, this.scene);
+    
+    // Hacer el mesh invisible (solo para física)
+    antPhysicsMesh.isVisible = false;
+    
+    // Posicionar el mesh de física en la misma posición que la hormiga
+    antPhysicsMesh.position.copyFrom(this.root.position);
+    
+    // Hacer que el mesh de física sea hijo del root de la hormiga
+    antPhysicsMesh.parent = this.root;
+    antPhysicsMesh.position = Vector3.Zero(); // Resetear posición relativa
+    
+    // Crear el impostor de física usando BoxImpostor (más compatible)
+    this.physicsImpostor = new PhysicsImpostor(antPhysicsMesh, PhysicsImpostor.BoxImpostor, {
+      mass: 1, // Masa ligera para la hormiga
+      restitution: 0.1, // Poco rebote
+      friction: 0.8 // Buena fricción para caminar
+    }, this.scene);
+    
+    this.physicsEnabled = true;
+    console.log("✓ Física habilitada para la hormiga (BoxImpostor)");
   }
 
-  /**
-   * Obtiene la posición actual del personaje
-   */
-  getPosition(): Vector3 {
-    return this.mesh ? this.mesh.position.clone() : Vector3.Zero();
-  }
-
-  // ============================================================================
-  // FUNCIONES ESPECIALIZADAS DE CARGA DE MODELOS GLB
-  // ============================================================================
-
-  /**
-   * Carga un modelo GLB con sus animaciones
-   */
-  private async loadModelGLB(
-    filePath: string,
-    fileName: string
-  ): Promise<{
-    mesh: AbstractMesh | null;
-    animationGroups: AnimationGroup[];
-    success: boolean;
-    error?: string;
-  }> {
-    try {
-      const result = await SceneLoader.ImportMeshAsync('', filePath, fileName, this.scene);
-      if (result.meshes.length === 0) {
-        throw new Error('No se encontraron meshes en el archivo GLB.');
-      }
-      return {
-        mesh: result.meshes[0],
-        animationGroups: result.animationGroups,
-        success: true,
-      };
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : 'Error desconocido';
-      return { mesh: null, animationGroups: [], success: false, error: msg };
+  /** Deshabilita la física para la hormiga */
+  disablePhysics() {
+    if (this.physicsImpostor) {
+      this.physicsImpostor.dispose();
+      this.physicsImpostor = null;
     }
+    this.physicsEnabled = false;
+    console.log("✗ Física deshabilitada para la hormiga");
   }
 
-  /**
-   * Carga una animación desde un archivo GLB y la aplica al mesh principal.
-   */
-  private async loadAnimationGLB(
-    filePath: string,
-    fileName: string,
-    animationName: string
-  ): Promise<{
-    animationGroup: AnimationGroup | null;
-    success: boolean;
-    error?: string;
-  }> {
-    try {
-      const result = await SceneLoader.ImportMeshAsync(null, filePath, fileName, this.scene);
-      if (result.animationGroups.length === 0) {
-        throw new Error('No se encontraron animaciones en el archivo.');
-      }
-
-      const animationGroup = result.animationGroups[0];
-      animationGroup.name = animationName;
-
-      // Retarget la animación al esqueleto del mesh principal
-      if (this.mesh) {
-        const skeleton = this.mesh.skeleton;
-        if (skeleton) {
-          animationGroup.targetedAnimations.forEach((ta) => {
-            const anim = ta.animation;
-            // El target de la animación debe ser el esqueleto
-            anim.targetPropertyPath.forEach((_, i) => {
-              try {
-                // Intenta re-vincular la animación al hueso correspondiente por nombre
-                const bone = skeleton.bones.find((b) => b.name === ta.target.name);
-                if (bone) {
-                  animationGroup.addTargetedAnimation(anim, bone);
-                }
-              } catch (e) {
-                // Ignorar si la re-vinculación falla
-              }
-            });
-          });
-        }
-      }
-
-      // Descartar los meshes cargados con la animación para no tener duplicados
-      result.meshes.forEach((m) => m.dispose());
-
-      return { animationGroup, success: true };
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : 'Error desconocido';
-      return { animationGroup: null, success: false, error: msg };
-    }
+  /** Aplica una fuerza de movimiento (para usar con física) */
+  applyMovementForce(direction: Vector3, force: number) {
+    if (!this.physicsImpostor) return;
+    
+    // Aplicar fuerza horizontal (mantener Y en 0 para evitar vuelo)
+    const movementForce = new Vector3(direction.x * force, 0, direction.z * force);
+    this.physicsImpostor.applyImpulse(movementForce, this.getPosition());
   }
 
-  // ============================================================================
-
-  /**
-   * Libera recursos del personaje
-   */
-  dispose(): void {
-    this.stopAnimations();
-
-    Object.values(this.animations).forEach((anim) => {
-      if (anim) anim.dispose();
-    });
-
-    if (this.mesh) {
-      this.mesh.dispose();
-    }
+  /** Verifica si la física está habilitada */
+  isPhysicsEnabled(): boolean {
+    return this.physicsEnabled;
   }
 }

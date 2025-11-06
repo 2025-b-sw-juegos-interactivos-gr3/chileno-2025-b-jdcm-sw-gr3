@@ -1,0 +1,11 @@
+Model Information:
+* title:	Candy Pirate
+* source:	https://sketchfab.com/3d-models/candy-pirate-c5dc69dcbc2e4f098585d50c4ae33a71
+* author:	Casey DeDore (https://sketchfab.com/caseydedore)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Candy Pirate" (https://sketchfab.com/3d-models/candy-pirate-c5dc69dcbc2e4f098585d50c4ae33a71) by Casey DeDore (https://sketchfab.com/caseydedore) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

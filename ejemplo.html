@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Babylon.js - Ejemplo de Recoger y Dejar</title>
+  <style>
+    html,
+    body {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #renderCanvas {
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+  </style>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+</head>
+
+<body><canvas id="renderCanvas"></canvas>
+  <script>const canvas = document.getElementById("renderCanvas");
+    const engine = new BABYLON.Engine(canvas, true);
+
+    // Variable de estado para saber si tenemos el paquete
+    let paqueteEnMano = false;
+
+    // Mapa para rastrear las teclas presionadas
+    let inputMap = {};
+
+    const createScene = function () {
+      const scene = new BABYLON.Scene(engine);
+      scene.collisionsEnabled = true;
+
+      // --- Cámara y Luz ---
+      const camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+      camera.setTarget(BABYLON.Vector3.Zero()); camera.attachControl(canvas, true);
+
+      const light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+      light.intensity = 0.7;
+
+      // --- Materiales (Colores) ---
+      const matJugador = new BABYLON.StandardMaterial("matJugador", scene);
+      matJugador.diffuseColor = new BABYLON.Color3(0, 0.5, 1); // Azul
+      const matPaquete = new BABYLON.StandardMaterial("matPaquete", scene);
+      matPaquete.diffuseColor = new BABYLON.Color3(1, 0, 0); // Rojo
+      const matZona = new BABYLON.StandardMaterial("matZona", scene);
+      matZona.diffuseColor = new BABYLON.Color3(0, 1, 0); // Verde
+      matZona.alpha = 0.5; // Semitransparente
+      const matSuelo = new BABYLON.StandardMaterial("matSuelo", scene);
+      matSuelo.diffuseColor = new BABYLON.Color3(0.5, 0.5, 0.5); // Gris
+      // --- Objetos ---
+      const suelo = BABYLON.MeshBuilder.CreateGround("suelo", { width: 20, height: 20 }, scene);
+      suelo.material = matSuelo;
+      const jugador = BABYLON.MeshBuilder.CreateBox("jugador", { size: 1 }, scene);
+      jugador.material = matJugador; jugador.position.y = 0.5;
+
+      const paquete = BABYLON.MeshBuilder.CreateBox("paquete", { size: 0.5 }, scene);
+      paquete.material = matPaquete; paquete.position = new BABYLON.Vector3(5, 0.25, 5);
+
+      const zonaEntrega = BABYLON.MeshBuilder.CreateGround("zonaEntrega", { width: 3, height: 3 }, scene);
+      zonaEntrega.material = matZona; zonaEntrega.position = new BABYLON.Vector3(-5, 0.01, -5); // 0.01 para estar sobre el suelo
+      // --- Lógica de Input ---
+      scene.actionManager = new BABYLON.ActionManager(scene);
+
+      scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyDownTrigger, function (evt) {
+        inputMap[evt.sourceEvent.key.toLowerCase()] = true;
+      }));
+      scene.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnKeyUpTrigger, function (evt) {
+        inputMap[evt.sourceEvent.key.toLowerCase()] = false;
+      }));
+
+      // --- Lógica de Recoger / Dejar (Al presionar Espacio) ---            
+      scene.onKeyboardObservable.add((kbInfo) => {
+        if (kbInfo.type === BABYLON.KeyboardEventTypes.KEYDOWN) {
+          if (kbInfo.event.key === " ") { // Barra espaciadora// 1. Lógica para RECOGER
+            if (!paqueteEnMano) {
+              let dist = BABYLON.Vector3.Distance(jugador.position, paquete.position);
+              if (dist < 2) { // Si está suficientemente cerca
+                console.log("¡Paquete recogido!");
+                paquete.parent = jugador; // ¡La magia! El paquete ahora es hijo del jugador
+                paquete.position = new BABYLON.Vector3(0, 0.7, 0); // Posición relativa al jugador (encima)
+                paqueteEnMano = true;
+              }
+            }
+            // 2. Lógica para DEJAR
+            else {
+              let dist = BABYLON.Vector3.Distance(jugador.position, zonaEntrega.position);
+              if (dist < 2) { // Si está suficientemente cerca de la zona
+                console.log("¡Paquete entregado!");
+                paquete.parent = null; // ¡La magia! El paquete ya no tiene padre
+                paquete.position = zonaEntrega.position.clone(); // Dejarlo en la zona
+                paquete.position.y = 0.25; // Ponerlo sobre la zona
+                paqueteEnMano = false;
+              }
+            }
+          }
+        }
+      });
+
+      // --- Game Loop (Movimiento del jugador) ---
+      const velocidad = 0.1;
+      scene.onBeforeRenderObservable.add(() => {
+        if (inputMap["w"]) {
+          jugador.position.z += velocidad;
+        }
+        if (inputMap["s"]) {
+          jugador.position.z -= velocidad;
+        }
+        if (inputMap["a"]) {
+          jugador.position.x -= velocidad;
+        }
+        if (inputMap["d"]) {
+          jugador.position.x += velocidad;
+        }
+      });
+
+      return scene;
+    };
+
+
+
+    const scene = createScene();
+
+    engine.runRenderLoop(function () {
+      scene.render();
+    });
+
+    window.addEventListener("resize", function () {
+      engine.resize();
+    });
+  </script>
+</body>
+
+</html>

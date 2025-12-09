@@ -1,7 +1,7 @@
 # Taller 1.1 (Asincrónico): Deconstruyendo la Diversión 
 ## Tema: El "Qué" y el "Dónde" - Análisis de Sistemas con el Framework MDA 
 
-**Nombre:** Jefferson Chileno
+**Nombres:** Jefferson Chileno - David Quille
 
 
 ## 🎮 Ficha de Análisis: Tabla Comparativa MDA

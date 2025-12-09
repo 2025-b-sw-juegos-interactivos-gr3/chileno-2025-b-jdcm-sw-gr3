@@ -1,7 +1,7 @@
 # 💻 Taller 1.3 (Asincrónico): Arqueología Digital
 ## Tema: La Evolución de la Industria - Cómo las Restricciones Crean Innovación
 
-**Nombre:** Jefferson Chileno
+**Nombres:** Jefferson Chileno - David Quille
 
 ---
 
